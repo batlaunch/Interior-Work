@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
 import {
@@ -6,10 +5,6 @@ import {
   Star, MapPin, Clock, Mail, Menu, X, ArrowRight, CheckCircle2,
   Youtube, Facebook,
 } from "lucide-react";
-
-export const Route = createFileRoute("/")({
-  component: HomePage,
-});
 
 const PHONE_DISPLAY = "(703) 594-9991";
 const PHONE_TEL = "tel:+17035949991";
