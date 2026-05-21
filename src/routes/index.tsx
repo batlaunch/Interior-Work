@@ -286,6 +286,7 @@ function Education() {
     </section>
   );
 }
+function Gallery() {
   const labels = [
     "Plumbing Install", "Water Heater Replacement", "Faucet Work",
     "Garbage Disposal", "Paint Project", "Before & After",
