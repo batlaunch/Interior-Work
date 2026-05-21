@@ -36,6 +36,7 @@ function Nav() {
   const links = [
     { href: "#services", label: "Services" },
     { href: "#about", label: "About" },
+    { href: "#tips", label: "Tips" },
     { href: "#gallery", label: "Work" },
     { href: "#reviews", label: "Reviews" },
     { href: "#contact", label: "Contact" },
@@ -238,6 +239,54 @@ function About() {
   );
 }
 
+function Education() {
+  const tips = [
+    { title: "How to Shut Off Your Main Water Valve", category: "Plumbing" },
+    { title: "Signs Your Water Heater Needs Replacing", category: "Plumbing" },
+    { title: "Preventing Frozen Pipes This Winter", category: "Maintenance" },
+    { title: "DIY Faucet Maintenance That Saves Money", category: "Maintenance" },
+    { title: "What to Do Before Calling a Plumber", category: "Tips" },
+    { title: "Understanding Low Water Pressure", category: "Plumbing" },
+  ];
+
+  return (
+    <section id="tips" className="py-20 md:py-28 bg-ink text-ink-foreground">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <div className="text-sm font-bold uppercase tracking-widest text-accent">Learn</div>
+            <h2 className="mt-2 text-4xl md:text-5xl font-black uppercase">Tips &amp; Education</h2>
+            <p className="mt-3 text-white/70 max-w-xl">
+              Short videos that help Charlottesville homeowners understand their plumbing, spot problems early, and save money.
+            </p>
+          </div>
+          <a href={YT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-accent font-bold hover:underline">
+            Watch all on YouTube <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+        <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {tips.map((tip, i) => (
+            <a
+              key={tip.title}
+              href={YT}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-white/5 border border-white/10 rounded-xl p-6 hover:border-accent transition"
+            >
+              <div className="aspect-video bg-black/30 rounded-lg flex items-center justify-center mb-4 border border-white/5 group-hover:border-accent/30 transition">
+                <div className="h-12 w-12 rounded-full bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition">
+                  <Youtube className="h-6 w-6" />
+                </div>
+              </div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-accent mb-1">{tip.category}</div>
+              <h3 className="font-bold text-lg leading-snug">{tip.title}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 function Gallery() {
   const labels = [
     "Plumbing Install", "Water Heater Replacement", "Faucet Work",
@@ -465,6 +514,7 @@ function HomePage() {
         <Hero />
         <Services />
         <About />
+        <Education />
         <Gallery />
         <Reviews />
         <Contact />
