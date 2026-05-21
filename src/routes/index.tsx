@@ -506,7 +506,7 @@ function MobileCallBar() {
   );
 }
 
-function HomePage() {
+export function HomePage() {
   return (
     <div className="min-h-screen bg-background pb-24 md:pb-0">
       <Nav />

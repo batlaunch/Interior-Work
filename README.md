@@ -26,53 +26,32 @@ npm run dev
 3. **Hours / days** — confirm the operating days and update the trust
    bar, About, Contact, and Footer copy.
 
-## Deploying to AWS S3 + CloudFront (static export)
+## Deploying as a static site (S3 + CloudFront)
 
-This repo is currently scaffolded on TanStack Start for Lovable's
-preview. For a **pure static** deploy to S3/CloudFront, follow these
-steps to convert it to a plain Vite SPA before building:
+The repo ships with a ready-to-use static SPA build alongside the
+Lovable preview setup. The static entry lives in:
 
-1. **Switch to a static SPA config.** Replace `vite.config.ts` with a
-   minimal Vite config (no Cloudflare/TanStack Start plugins) and set
-   `base: './'`:
+- `static-build/index.html` — SPA HTML shell
+- `static-build/vite.config.ts` — pure Vite config (no SSR/Cloudflare)
+- `src/main.tsx` — mounts `<HomePage />` directly
 
-   ```ts
-   import { defineConfig } from "vite";
-   import react from "@vitejs/plugin-react";
-   import path from "path";
-   import tailwindcss from "@tailwindcss/vite";
+Build it:
 
-   export default defineConfig({
-     base: "./",
-     plugins: [react(), tailwindcss()],
-     resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
-   });
-   ```
+```bash
+npm install
+npm run build:static
+```
 
-2. **Add a SPA entry.** Create `index.html` at the project root and
-   `src/main.tsx` that mounts the `HomePage` component directly (or
-   wrap in `HashRouter` if you add more routes — **do not** use
-   `BrowserRouter` for S3 hosting).
+Output lands in `./dist`.
 
-3. **Build:**
+**S3:** upload the contents of `dist/` to your bucket. Enable
+"Static website hosting" — index document `index.html`, error
+document `index.html`.
 
-   ```bash
-   npm install
-   npm run build
-   ```
-
-   Output lands in `dist/`.
-
-4. **S3:** upload the contents of `dist/` to your bucket. Enable
-   "Static website hosting" — index document `index.html`, error
-   document `index.html`.
-
-5. **CloudFront:** create a distribution with the S3 bucket as the
-   origin. Set the default root object to `index.html`. Add a custom
-   error response: **404 → /index.html → 200** (and the same for 403)
-   so client-side routing works on refresh.
-
-6. Invalidate `/*` on CloudFront after each new upload.
+**CloudFront:** create a distribution with the S3 bucket as the
+origin, set the default root object to `index.html`, and add a custom
+error response (**404 → /index.html → 200**, same for 403) so the SPA
+handles unknown paths. Invalidate `/*` after each upload.
 
 ## What's intentionally NOT in this project
 
