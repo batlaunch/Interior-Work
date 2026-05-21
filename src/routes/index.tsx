@@ -514,6 +514,7 @@ function HomePage() {
         <Hero />
         <Services />
         <About />
+        <Education />
         <Gallery />
         <Reviews />
         <Contact />
