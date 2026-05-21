@@ -36,6 +36,7 @@ function Nav() {
   const links = [
     { href: "#services", label: "Services" },
     { href: "#about", label: "About" },
+    { href: "#tips", label: "Tips" },
     { href: "#gallery", label: "Work" },
     { href: "#reviews", label: "Reviews" },
     { href: "#contact", label: "Contact" },
